@@ -1,5 +1,7 @@
 # Vidi - Premium Hand-crafted Sarees
 
+🚀 **Live Demo:** [https://vidi-saree.vercel.app/](https://vidi-saree.vercel.app/)
+
 Vidi is a modern, high-octane e-commerce platform dedicated to hand-crafted, luxury sarees. It combines rich cultural heritage with a state-of-the-art shopping experience, offering exclusive collections such as Silk, Cotton, Banarasi, and Chiffon.
 
 ## MVP Overview
@@ -59,7 +61,14 @@ This project is built to showcase a fully functional, production-ready MVP for l
    ```bash
    npm run dev
    ```
-   The platform will be available at `http://localhost:3000`.
+   The platform will be available locally at `http://localhost:3000`.
+
+### Production Deployment
+When deploying to Vercel, ensure you set the environment variables in your Vercel Dashboard to point to your live domain:
+```env
+NEXT_PUBLIC_BASE_URL="https://vidi-saree.vercel.app"
+BETTER_AUTH_URL="https://vidi-saree.vercel.app"
+```
 
 ## Design Decisions
 - **URL-driven State**: Product sorting and filtering states are driven by the URL (Search Parameters). This ensures that filtered views are perfectly shareable and fully support Server-Side Rendering (SSR).
