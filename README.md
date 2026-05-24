@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vidi - Premium Hand-crafted Sarees
+
+Vidi is a modern, high-octane e-commerce platform dedicated to hand-crafted, luxury sarees. It combines rich cultural heritage with a state-of-the-art shopping experience, offering exclusive collections such as Silk, Cotton, Banarasi, and Chiffon.
+
+## MVP Overview
+This project is built to showcase a fully functional, production-ready MVP for luxury ethnic wear. It features a stunning, dynamic user interface crafted to highlight the elegance of the products, along with a robust backend architecture for catalog management and filtering.
+
+### Key Features
+- **Dynamic Hero Section**: A stunning, full-bleed card layout with overlay typography and direct calls-to-action ("Explore Collections" & "Browse Materials").
+- **Intelligent Product Filtering**: Browse products with real-time URL-based sorting (Newest, Popularity, Rating, Price).
+- **Seamless "Load More" Pagination**: Endless scrolling experience that fetches additional products seamlessly from the server without full page reloads.
+- **Server Actions & React Server Components (RSC)**: Leverages Next.js App Router for optimal performance, ensuring rapid initial page loads and secure data fetching.
+- **Responsive Design**: Flawless experience across mobile, tablet, and desktop viewports.
+- **Strict Brand Theme**: Implements a strict two-color aesthetic (Dark Pink `#970747` & White `#FFFFFF`) with tasteful gold/teal/orange accents for specific calls-to-action.
+
+## Tech Stack
+- **Framework:** Next.js 16.2 (Turbopack) using the App Router
+- **Language:** TypeScript
+- **Database ORM:** Prisma (PostgreSQL)
+- **Styling:** Tailwind CSS + custom CSS Variables
+- **Icons:** Lucide React
+- **Authentication:** Better Auth (Configured for future implementation)
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js (v18+)
+- npm or yarn
+- PostgreSQL Database
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Installation
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd Vidi
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. **Environment Setup:**
+   Create a `.env` file in the root directory and configure your database connection:
+   ```env
+   DATABASE_URL="postgresql://user:password@localhost:5432/vidi_db"
+   ```
 
-## Learn More
+4. **Database Migration & Seeding:**
+   ```bash
+   npx prisma generate
+   npx prisma db push
+   # Optional: run seed script if available to populate catalog
+   npx prisma db seed
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+5. **Start the Development Server:**
+   ```bash
+   npm run dev
+   ```
+   The platform will be available at `http://localhost:3000`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Design Decisions
+- **URL-driven State**: Product sorting and filtering states are driven by the URL (Search Parameters). This ensures that filtered views are perfectly shareable and fully support Server-Side Rendering (SSR).
+- **Deterministic Pagination**: When using "Load More", Prisma queries utilize a deterministic tie-breaker (`id: "asc"`) to prevent identical products from appearing across multiple pages.
+- **Component Architecture**: Deeply integrated UI components such as the Client-side `ProductGridClient` interacting with Server Actions (`fetchProductsAction`) strictly isolate interactive state from static HTML generation.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Future Development
+Following the MVP presentation, upcoming features will include:
+- User Authentication (Better Auth) & Profile Management
+- Full Shopping Cart & Checkout flow
+- Admin Dashboard for Product/Inventory Management
+- Review & Rating submission system
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+*Crafted with ❤️ in India.*
