@@ -11,6 +11,7 @@ export async function bulkImportProducts(formData: FormData) {
       return { success: false, error: "No file provided" };
     }
 
+    
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
     
