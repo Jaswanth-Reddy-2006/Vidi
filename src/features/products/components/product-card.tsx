@@ -2,8 +2,9 @@
 
 import { SafeImage } from "@/components/ui/safe-image";
 import Link from "next/link";
-import { Heart, ShoppingBag } from "lucide-react";
+import { Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { AddToCartButton } from "@/features/cart/components/add-to-cart-button";
 import { formatPrice } from "@/lib/utils";
 
 interface ProductCardProps {
@@ -59,10 +60,12 @@ export function ProductCard({ product }: ProductCardProps) {
         
         {/* Add to Cart (Hover - Desktop) */}
         <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block">
-          <Button className="w-full bg-white/90 hover:bg-maroon-700 hover:text-white text-maroon-900 backdrop-blur-sm border-none shadow-lg">
-            <ShoppingBag className="w-4 h-4 mr-2" />
+          <AddToCartButton 
+            productId={product.id} 
+            className="w-full bg-white/90 hover:bg-maroon-700 hover:text-white text-maroon-900 backdrop-blur-sm border-none shadow-lg"
+          >
             Quick Add
-          </Button>
+          </AddToCartButton>
         </div>
       </div>
 

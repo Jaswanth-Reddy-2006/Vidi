@@ -72,7 +72,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="container max-w-4xl py-10">
+    <div className="container max-w-4xl mx-auto py-10">
       {Script}
       <h1 className="text-3xl font-playfair font-semibold mb-8">Checkout</h1>
       
@@ -126,10 +126,10 @@ export default function CheckoutPage() {
               </div>
 
               <div className="flex gap-4">
-                <Button variant="outline" onClick={() => setStep(1)} disabled={isLoading}>
+                <Button variant="outline" className="border-maroon-700 text-maroon-700 hover:bg-maroon-50" onClick={() => setStep(1)} disabled={isLoading}>
                   Back
                 </Button>
-                <Button className="flex-1" onClick={handleCheckout} disabled={isLoading || (!isLoaded && paymentMethod === "RAZORPAY")}>
+                <Button className="flex-1 bg-maroon-700 hover:bg-maroon-800 text-white" onClick={handleCheckout} disabled={isLoading || (!isLoaded && paymentMethod === "RAZORPAY")}>
                   {isLoading ? "Processing..." : "Place Order"}
                 </Button>
               </div>

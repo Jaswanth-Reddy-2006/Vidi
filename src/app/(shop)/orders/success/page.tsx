@@ -36,7 +36,7 @@ export default async function OrderSuccessPage({
   }
 
   return (
-    <div className="container max-w-3xl py-16 text-center">
+    <div className="container max-w-3xl mx-auto py-16 text-center">
       <div className="flex justify-center mb-6">
         <div className="h-24 w-24 bg-green-100 rounded-full flex items-center justify-center">
           <CheckCircle2 className="h-12 w-12 text-green-600" />

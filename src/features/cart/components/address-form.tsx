@@ -149,7 +149,7 @@ export function AddressForm({ defaultValues, onSubmit, isLoading }: AddressFormP
           />
         </div>
 
-        <Button type="submit" className="w-full" disabled={isLoading}>
+        <Button type="submit" className="w-full bg-maroon-700 hover:bg-maroon-800 text-white" disabled={isLoading}>
           {isLoading ? "Saving..." : "Continue to Payment"}
         </Button>
       </form>

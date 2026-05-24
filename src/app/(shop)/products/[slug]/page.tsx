@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Star, Truck, Shield, RotateCcw } from "lucide-react";
 import { getProductBySlug } from "@/features/products/services/product-service";
 import { formatPrice } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { AddToCartButton } from "@/features/cart/components/add-to-cart-button";
 import { PincodeEstimator } from "@/features/products/components/pincode-estimator";
 import { ReviewList } from "@/features/reviews/components/review-list";
 
@@ -117,12 +117,15 @@ export default async function ProductDetailPage({
           <div className="space-y-6 mb-10">
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="flex-1 bg-maroon-800 hover:bg-maroon-900 text-white h-14 text-lg rounded-xl">
-                Add to Cart
-              </Button>
-              <Button size="lg" variant="outline" className="flex-1 border-gold-500 text-gold-600 hover:bg-gold-50 dark:hover:bg-gold-950 h-14 text-lg rounded-xl">
-                Buy it Now
-              </Button>
+              <AddToCartButton 
+                productId={product.id}
+                className="flex-1 bg-maroon-800 hover:bg-maroon-900 text-white h-14 text-lg rounded-xl" 
+              />
+              <AddToCartButton 
+                productId={product.id}
+                isBuyNow
+                className="flex-1 border border-gold-500 text-gold-600 hover:bg-gold-50 dark:hover:bg-gold-950 h-14 text-lg rounded-xl bg-transparent hover:text-gold-700"
+              />
             </div>
           </div>
 

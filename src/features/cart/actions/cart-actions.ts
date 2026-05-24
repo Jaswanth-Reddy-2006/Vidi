@@ -46,6 +46,20 @@ export async function getCart() {
   return null;
 }
 
+export async function getCartItemCount() {
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session?.user) return 0;
+
+  const cart = await prisma.cart.findUnique({
+    where: { userId: session.user.id },
+    include: { items: { select: { quantity: true } } },
+  });
+
+  if (!cart) return 0;
+
+  return cart.items.reduce((total, item) => total + item.quantity, 0);
+}
+
 export async function addToCart(productId: string, quantity: number = 1, variantId?: string) {
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session?.user) {

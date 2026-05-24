@@ -9,6 +9,7 @@ import { AddressFormValues } from "@/features/cart/components/address-form";
 import crypto from "crypto";
 
 export async function createOrderAndPayment(data: { address: AddressFormValues; method: "COD" | "RAZORPAY" }) {
+  try {
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session?.user) {
     throw new Error("You must be logged in to checkout");
@@ -45,7 +46,7 @@ export async function createOrderAndPayment(data: { address: AddressFormValues; 
   });
 
   // Create order
-  const orderNumber = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+  const orderNumber = `ORD-${Date.now().toString().slice(-8)}-${Math.floor(Math.random() * 1000)}`;
   
   const order = await prisma.order.create({
     data: {
@@ -123,6 +124,10 @@ export async function createOrderAndPayment(data: { address: AddressFormValues; 
     total,
     razorpayOrderId,
   };
+  } catch (error: any) {
+    console.error("PAYMENT ACTION ERROR:", error);
+    throw new Error(error?.message || "Failed to create order");
+  }
 }
 
 export async function verifyPayment(data: {

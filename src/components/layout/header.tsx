@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Search,
@@ -19,6 +19,8 @@ import {
 import { useSession, signOut } from "@/lib/auth-client";
 import { useTheme } from "@/components/providers/theme-provider";
 import { cn } from "@/lib/utils";
+import { useCartStore } from "@/features/cart/store/cart-store";
+import { getCartItemCount } from "@/features/cart/actions/cart-actions";
 
 const categories = [
   { name: "Silk Sarees", href: "/categories/silk-sarees" },
@@ -38,9 +40,22 @@ export function Header() {
   const { data: session } = useSession();
   const { theme, setTheme } = useTheme();
 
+  const { itemCount, setItemCount } = useCartStore();
+
+  useEffect(() => {
+    if (session?.user) {
+      getCartItemCount().then((count) => {
+        setItemCount(count);
+      });
+    } else {
+      setItemCount(0);
+    }
+  }, [session, setItemCount]);
+
   const handleSignOut = async () => {
     await signOut();
     setIsProfileOpen(false);
+    setItemCount(0);
   };
 
   return (
@@ -174,9 +189,11 @@ export function Header() {
               >
                 <ShoppingBag className="w-5 h-5" />
                 {/* Cart count badge */}
-                <span className="absolute -top-0.5 -right-0.5 bg-white text-maroon-700 text-[10px] font-bold w-4.5 h-4.5 flex items-center justify-center rounded-full">
-                  0
-                </span>
+                {itemCount > 0 && (
+                  <span className="absolute -top-0.5 -right-0.5 bg-white text-maroon-700 text-[10px] font-bold w-4.5 h-4.5 flex items-center justify-center rounded-full">
+                    {itemCount > 99 ? "99+" : itemCount}
+                  </span>
+                )}
               </Link>
 
               {/* Profile / Auth */}
